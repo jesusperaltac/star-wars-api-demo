@@ -1,0 +1,5 @@
+<ng-container *ngIf="peopleResponse$ | async as peopleResponse">
+    <ng-container *ngFor="let people of peopleResponse.results">
+        <p>{{people.name}}</p>
+    </ng-container>
+</ng-container>
