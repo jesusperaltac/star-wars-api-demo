@@ -1,5 +1,6 @@
-<ng-container *ngIf="peopleList()">
-    <ng-container *ngFor="let people of peopleList()">
-        <p>{{people.name}}</p>
-    </ng-container>
-</ng-container>
+<mat-list role="list">
+    @for (people of peopleList(); track people) {
+        <mat-list-item role="listitem">{{people.name}}</mat-list-item>
+    }
+</mat-list>
+  
