@@ -1,9 +1,6 @@
 import { Component, inject } from '@angular/core';
-import { PeopleService } from '../../services/people.service';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { PeopleResponse } from '../../model/people.model'
+import { PeopleFacadeService } from '../../state/people.facade.service';
 
 @Component({
   selector: 'app-people-overview',
@@ -13,8 +10,7 @@ import { PeopleResponse } from '../../model/people.model'
   styleUrl: './people-overview.component.scss'
 })
 export class PeopleOverviewComponent {
-   private peopleService = inject(PeopleService);
-
-   public peopleResponse$: Observable<PeopleResponse> = this.peopleService.getAll(); 
+  private peopleFacadeService = inject(PeopleFacadeService);
+  public peopleList = this.peopleFacadeService.peopleList;
 
 }
