@@ -26,3 +26,21 @@ mat-grid-tile:hover {
 .button-row button {
   margin-right: 8px;
 }
+
+.search {
+  width: 90%;
+}
+
+.add-btn {
+  width: 10%;
+}
+
+@media only screen and (max-width: 600px) {
+  .search{
+    width: 80%;
+  }
+  .add-btn {
+    width: 20%;
+  }
+  
+}

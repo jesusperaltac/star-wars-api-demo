@@ -5,14 +5,16 @@
 
     <h2 class="mdc-list-item">Character List of Star Wars</h2>
 
-      <mat-grid-list cols="12" rowHeight="60px">
-        <mat-grid-tile  colspan="11"  rowspan="1">
-            <button mat-fab extended (click)="addPeople()">
-                <mat-icon>add</mat-icon>
-                Add
-            </button>
-        </mat-grid-tile>
-        
+    <mat-form-field class="search">
+        <input #filterQuery matInput (input)="applyFilter(filterQuery.value)" placeholder="Search" >
+    </mat-form-field>
+
+    <button mat-icon-button (click)="addPeople()" class="add-btn">
+        <mat-icon>add</mat-icon>
+    </button>
+
+    <mat-grid-list cols="12" rowHeight="45px">
+
         @for (people of peopleList(); track people) {
             <mat-grid-tile  colspan="11"  rowspan="1" (click)="selectPerson(people, drawer)">
                 <span class="align-left">{{people.name}}</span>
