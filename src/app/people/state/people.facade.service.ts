@@ -2,6 +2,7 @@ import { Injectable, OnDestroy, inject, signal } from "@angular/core";
 import { BehaviorSubject, Subject, switchMap, takeUntil, tap } from "rxjs";
 import { People, PeopleResponse } from "../model/people.model";
 import { PeopleService } from "../services/people.service";
+import { environment } from "../../../environments/environment";
 
 @Injectable({
   providedIn: "root",
@@ -21,7 +22,9 @@ export class PeopleFacadeService implements OnDestroy {
   }
 
   private handlePeopleResponse(data: PeopleResponse) {
-    this.peopleList.update((values) => [...values, ...data.results]);
+    const peopleListWithIds = this.mapDataToPeopleDto(data.results);
+    this.peopleList.update((values) => [...values, ...peopleListWithIds]);
+    
     if (data.next) {
       this.peopleListPageSub$.next(data.next);
     } else {
@@ -29,6 +32,20 @@ export class PeopleFacadeService implements OnDestroy {
     }
   }
 
+  private mapDataToPeopleDto(peopleList: People[]){
+    return peopleList.map( (people: People) => {
+      return {
+        ...people,
+        id: this.extractIdfromPeopleUrl(people.url)
+      }
+      
+    })
+  }
+
+  private extractIdfromPeopleUrl(url: string): string {
+   const match = url.match(/\/(\d+)\/?$/);
+   return match && match[1] ? match[1] : '';
+  }
   ngOnDestroy(): void {
     this.stopPeopleListPageSub$.next();
   }

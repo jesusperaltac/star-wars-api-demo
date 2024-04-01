@@ -1,5 +1,5 @@
 export const environment = {
   backend: {
-    url: 'https://swapi.dev'
+    url: 'https://swapi.dev/api'
   }
 };

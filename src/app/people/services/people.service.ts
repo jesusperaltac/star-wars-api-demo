@@ -12,7 +12,7 @@ export class PeopleService {
   private http = inject(HttpClient);
 
   getPeopleList(url: string | null): Observable<PeopleResponse> {
-    return this.http.get<PeopleResponse>(url ?? `${environment.backend.url}/api/people/`);
+    return this.http.get<PeopleResponse>(url ?? `${environment.backend.url}/people/`);
   }
 
 }

@@ -1,6 +1,15 @@
-<mat-list role="list">
-    @for (people of peopleList(); track people) {
-        <mat-list-item role="listitem">{{people.name}}</mat-list-item>
-    }
-</mat-list>
-  
+<mat-drawer-container autosize>
+    <mat-drawer #drawer class="sidenav" mode="side" position="end" fixedInViewport="true">
+        <router-outlet />
+    </mat-drawer>
+
+    <h2 class="mdc-list-item">People List</h2>
+    <mat-list role="list">
+        @for (people of peopleList(); track people) {
+            <mat-list-item role="listitem">
+                <span (click)="selectPerson(people, drawer)">{{people.name}}</span>
+            </mat-list-item>
+        }
+    </mat-list>
+</mat-drawer-container>
+
