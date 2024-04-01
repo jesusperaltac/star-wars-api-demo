@@ -1,15 +1,17 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PeopleFacadeService } from '../../state/people.facade.service';
-import { MatListModule } from '@angular/material/list';
+import { MatGridListModule} from '@angular/material/grid-list';
 import { People } from '../../model/people.model';
 import { Router, RouterOutlet } from '@angular/router';
 import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-people-overview',
   standalone: true,
-  imports: [CommonModule, MatListModule, RouterOutlet, MatSidenavModule],
+  imports: [CommonModule, MatGridListModule, RouterOutlet, MatSidenavModule, MatButtonModule, MatIconModule],
   templateUrl: './people-overview.component.html',
   styleUrl: './people-overview.component.scss'
 })
@@ -20,8 +22,13 @@ export class PeopleOverviewComponent {
   public peopleList = this.peopleFacadeService.peopleList;
 
   public selectPerson(people: People, drawer: MatDrawer){
-    drawer.toggle();
+    drawer.open();
     this.router.navigate([`/people-overview/people-details/${people.id}`]);
+  }
+
+  public deletePerson(people: People, drawer: MatDrawer) {
+    drawer.close();
+    this.peopleFacadeService.deletePeople(people);
   }
 
 }

@@ -9,3 +9,16 @@ h2 {
   padding-right: 16px;
   padding-top: 32px
 }
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.align-left {
+  position: absolute;
+  left: 16px;
+}
+
+mat-grid-tile:hover {
+  background-color: rgb(252, 233, 236);
+}

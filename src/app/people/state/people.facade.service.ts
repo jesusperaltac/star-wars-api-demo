@@ -2,7 +2,6 @@ import { Injectable, OnDestroy, inject, signal } from "@angular/core";
 import { BehaviorSubject, Subject, switchMap, takeUntil, tap } from "rxjs";
 import { People, PeopleResponse } from "../model/people.model";
 import { PeopleService } from "../services/people.service";
-import { environment } from "../../../environments/environment";
 
 @Injectable({
   providedIn: "root",
@@ -46,6 +45,11 @@ export class PeopleFacadeService implements OnDestroy {
    const match = url.match(/\/(\d+)\/?$/);
    return match && match[1] ? match[1] : '';
   }
+
+  deletePeople(people: People) {
+    this.peopleList.update((values) => [...values.filter( v => v != people)]);
+  }
+
   ngOnDestroy(): void {
     this.stopPeopleListPageSub$.next();
   }
