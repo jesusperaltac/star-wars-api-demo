@@ -50,6 +50,10 @@ export class PeopleFacadeService implements OnDestroy {
     this.peopleList.update((values) => [...values.filter( v => v != people)]);
   }
 
+  addPeople(people: People) {
+    this.peopleList.update((values) => [people, ...values]);
+  }
+
   ngOnDestroy(): void {
     this.stopPeopleListPageSub$.next();
   }

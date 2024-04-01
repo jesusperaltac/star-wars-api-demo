@@ -1,0 +1,39 @@
+<h2 mat-dialog-title>Add a new character</h2>
+<mat-dialog-content>
+  <form [formGroup]="peopleForm" class="form-width">
+    <mat-form-field class="full-width">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name" />
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Height</mat-label>
+      <input matInput formControlName="height" />
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Mass</mat-label>
+      <input matInput formControlName="mass" />
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Birth Year</mat-label>
+      <input matInput formControlName="birth_year" placeholder="dd.MM.yyyy"/>
+    </mat-form-field>
+
+    <mat-form-field class="full-width">
+      <mat-label>Gender</mat-label>
+      <input matInput formControlName="gender" />
+    </mat-form-field>
+
+
+  </form>
+  <div *ngIf="peopleForm.touched && peopleForm.invalid" class="error">
+    Require data
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button (click)="cancel()">Cancel</button>
+  <button mat-button cdkFocusInitial (click)="save()">Save</button>
+</mat-dialog-actions>

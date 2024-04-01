@@ -7,11 +7,14 @@ import { Router, RouterOutlet } from '@angular/router';
 import { MatDrawer, MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { AddPeopleComponent } from '../add-people/add-people.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-people-overview',
   standalone: true,
-  imports: [CommonModule, MatGridListModule, RouterOutlet, MatSidenavModule, MatButtonModule, MatIconModule],
+  imports: [CommonModule, MatGridListModule, RouterOutlet, MatSidenavModule, MatButtonModule, MatIconModule, MatDialogModule, ReactiveFormsModule, FormsModule],
   templateUrl: './people-overview.component.html',
   styleUrl: './people-overview.component.scss'
 })
@@ -21,6 +24,8 @@ export class PeopleOverviewComponent {
 
   public peopleList = this.peopleFacadeService.peopleList;
 
+  constructor(public dialog: MatDialog) {}
+
   public selectPerson(people: People, drawer: MatDrawer){
     drawer.open();
     this.router.navigate([`/people-overview/people-details/${people.id}`]);
@@ -29,6 +34,10 @@ export class PeopleOverviewComponent {
   public deletePerson(people: People, drawer: MatDrawer) {
     drawer.close();
     this.peopleFacadeService.deletePeople(people);
+  }
+
+  public addPeople() {
+    this.dialog.open(AddPeopleComponent);
   }
 
 }
